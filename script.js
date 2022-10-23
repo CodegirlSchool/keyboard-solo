@@ -1,37 +1,98 @@
-document.addEventListener("keydown", keydownHandler);
-const spans = Array.from(document.querySelectorAll('.word span'));
-console.log(spans);
+const workWord = document.querySelector(".word");
 
-spans.forEach(function(item) {
-    console.log(item);
-})
+const correctCount = document.querySelector(".correct-count");
+const wrongCount = document.querySelector(".wrong-count");
+const wordMistakes = document.querySelector(".word-mistakes");
 
-function keydownHandler(event) {
-    console.log(event.key);
-    if (event.key === 'a') {
-        item.classList.add('c')
+const timer = document.querySelector("#timer");
+
+
+//рандомные слова
+function getRandomWord() {
+    const arr = [
+        'chicken', 'rooster', 'turkey', 'gobbler', 'goat', 'kid',
+        'sheep', 'ram', 'lamb', 'bull', 'cow', 'calf',
+        'horse', 'stallon', 'colt', 'mare', 'pig', 'sow',
+        'piglet', 'rabbit', 'kit', 'doe', 'buck'
+    ];
+
+    const rand = Math.floor(Math.random() * (arr.length));
+    return arr[rand];
+}
+
+let currentWord = getRandomWord();
+renderWord(currentWord);
+
+
+//обернем в span
+function renderWord(word) {
+    workWord.innerHTML = word
+        .split("")
+        .map((char) => `<span>${char}</span>`)
+        .join("");
+}
+
+
+//обработчик события
+let rand = 0;
+
+document.addEventListener("keypress", (event) => {
+    console.log(event.key, currentWord);
+    if (event.key === currentWord[rand]) {
+        workWord.children[rand].className = "c";
+        rand++;
     } else {
-        item.classList.add('w')
+        workWord.children[rand].className = "w";
+        wrongCount.textContent = ++wrongCount.textContent;
+        wordMistakes.textContent = ++wordMistakes.textContent;
     }
 
+    if (rand === currentWord.length) {
+        correctCount.textContent = ++correctCount.textContent;
+        setTimeout(nextWord, 0);
+    }
+
+});
+
+//вывод следующего слова
+function nextWord() {
+    checkWordsCount();
+    currentWord = getRandomWord();
+    renderWord(currentWord);
+    rand = 0;
+    wordMistakes.textContent = 0;
 }
-//const letter = letter.find((x) => x.dataset.letters.includes(event.key));
 
+//итог
+function checkWordsCount() {
+    if (wrongCount.textContent >= 5) {
+        alert(`Вы проиграли :( Ваше время ${timer.textContent}`);
+        clearTimer();
+    }
 
-
-/*const span = document.querySelector('.word');
-if (letter) {
-    press(event.key);
-    return;
+    if (correctCount.textContent >= 5) {
+        alert(`Победа! Ваше время ${timer.textContent}`);
+        clearTimer();
+    }
 }
 
+// таймер
+let seconds = "00";
+let minutes = "00";
 
-const arr = new Array('chicken',
-    'rooster', 'turkey', 'gobbler', 'goat', 'kid',
-    'sheep', 'ram', 'lamb', 'bull', 'cow', 'calf',
-    'horse', 'stallon', 'colt', 'mare', 'pig', 'sow',
-    'piglet', 'rabbit', 'kit', 'doe', 'buck');
+let timerFunction = setInterval(() => {
+    document.querySelector("#timer").innerHTML = `${minutes}:${seconds}`;
 
-function press(letter) {
-    console.log(letter);
-}*/
+    if (seconds < 59) {
+        seconds++;
+    } else {
+        minutes++;
+        seconds = 0;
+    }
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+}, 1000);
+
+function clearTimer() {
+    clearInterval(timerFunction);
+    timer.textContent = `00:00`;
+}

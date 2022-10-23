@@ -1,73 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Roboto&family=Rubik+Marker+Hatch&display=swap');
-html, body {
-  height: 100%;
+html,
+body {
+    height: 100%;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background: #fff;
-  background-image: url("./img/bg.jpeg");
-  background-size: 200px;
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: bottom;
-  display: flex;
-  flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    background: #fff;
+    background-image: url("./img/bg.jpeg");
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: bottom;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-  text-align: center;
+    text-align: center;
 }
 
 .status {
-  display: inline-block;
-  text-align: initial;
-  border: 1px dashed #000;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 14px 0;
+    display: inline-block;
+    text-align: initial;
+    border: 1px dashed #000;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 14px 0;
 }
 
 .header__title {
-  font-family: 'Rubik Marker Hatch', cursive;
-  font-style: italic;
-  font-size: 60px;
-  text-align: center;
-  margin-bottom: 10px;
+    font-family: 'Rubik Marker Hatch', cursive;
+    font-style: italic;
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .symbol {
-  font-size: 50px;
+    font-size: 50px;
+}
+
+.a {
+    color: rgb(117, 116, 116);
 }
 
 .c {
-  color: green;
+    color: green;
 }
 
 .w {
-  color: red;
+    color: red;
 }
 
 .word {
-  font-size: 55px;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 90px;
+    font-size: 55px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 90px;
 }
 
 .word_incorrect {
-  background: red;
-  color: #fff;
+    background: red;
+    color: #fff;
 }
 
 main {
-  position: relative;
-  flex-grow: 1;
+    position: relative;
+    flex-grow: 1;
 }
 
 #timer {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 20px;
 }
